@@ -10,11 +10,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    func displayCaption() {
-        topCaptionLabel.text = topChoices[topCaptionSegmentedControl.selectedSegmentIndex].captionText
-        bottomCaptionLabel.text = bottomChoices[bottomCaptionSegmentedControl.selectedSegmentIndex].captionText
-    }
-    
     let topChoices = [
         CaptionOption(captionEmoji: "🕶", captionText: "You know what's cool?"),
         CaptionOption(captionEmoji: "👿", captionText: "You know what makes me mad?"),
@@ -26,12 +21,20 @@ class ViewController: UIViewController {
         CaptionOption(captionEmoji: "🐒", captionText: "Monkeys being funky"),
         CaptionOption(captionEmoji: "🐝", captionText: "Bees with no knees")
     ]
-
+    
+    @IBOutlet weak var topCaptionSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var bottomCaptionSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var topCaptionLabel: UILabel!
+    @IBOutlet weak var bottomCaptionLabel: UILabel!
+    
+    @IBAction func segmentedControlAction(_ sender: Any) {
+        displayCaption()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         displayCaption()
-        
         
         topCaptionSegmentedControl.removeAllSegments()
         for choice in topChoices {
@@ -45,18 +48,10 @@ class ViewController: UIViewController {
         }
         bottomCaptionSegmentedControl.selectedSegmentIndex = 0
     }
-        
     
-    @IBOutlet weak var topCaptionSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var bottomCaptionSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var topCaptionLabel: UILabel!
-    @IBOutlet weak var bottomCaptionLabel: UILabel!
-    
-    @IBAction func segmentedControlAction(_ sender: Any) {
-        displayCaption()
+    func displayCaption() {
+        topCaptionLabel.text = topChoices[topCaptionSegmentedControl.selectedSegmentIndex].captionText
+        bottomCaptionLabel.text = bottomChoices[bottomCaptionSegmentedControl.selectedSegmentIndex].captionText
     }
-    
-
-
 }
 
